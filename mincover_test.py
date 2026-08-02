@@ -18,7 +18,8 @@ def test_cases(testcase):
 
 def test_new_cases():
     # your new tests here
-    def is_vertex_cover(graph, cover):
+   
+def is_vertex_cover(graph, cover):
     return all(u in cover or v in cover for u, v in graph.edges())
 
 
