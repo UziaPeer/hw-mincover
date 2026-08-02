@@ -19,7 +19,25 @@ def mincover(graph: nx.Graph)->set:
     0
     """
     # Your code here
-    pass
+     edges = list(graph.edges())
+
+    if len(edges) == 0:
+        return set()
+
+    vertices = list(graph.nodes())
+    index = {v: i for i, v in enumerate(vertices)}
+
+    x = cvxpy.Variable(len(vertices), boolean=True)
+
+    constraints = []
+    for u, v in edges:
+        constraints.append(x[index[u]] + x[index[v]] >= 1)
+
+    problem = cvxpy.Problem(cvxpy.Minimize(cvxpy.sum(x)), constraints)
+    problem.solve(solver=cvxpy.SCIPY)
+
+    return {vertices[i] for i in range(len(vertices)) if x.value[i] > 0.5}
+
 
 if __name__ == '__main__':
     import doctest
