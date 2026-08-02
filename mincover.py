@@ -18,7 +18,7 @@ def mincover(graph: nx.Graph)->set:
     >>> len(mincover(nx.Graph([])))
     0
     """
-    # Your code here
+    # Your code here.
      edges = list(graph.edges())
 
     if len(edges) == 0:
